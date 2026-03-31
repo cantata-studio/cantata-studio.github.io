@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CANTATA Studio | 专业影视制作</title>
+    <meta name="description" content="CANTATA Studio 专注于企业宣传片、商业广告片、音乐MV、IP打造。用影像讲述品牌故事，电影级制作标准。">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --carbon-black: #18181B;
+            --deep-black: #000000;
+            --graphite: #27272A;
+            --ivory: #FAFAFA;
+            --champagne-gold: #C9A87C;
+            --warm-gold: #B8956B;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+            background-color: var(--ivory);
+            color: var(--carbon-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Typography */
+        .title-en {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        .title-cn {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+        }
+        
+        .body-text {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            font-weight: 400;
+            line-height: 1.75;
+            letter-spacing: 0.01em;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            background-color: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 16px 48px;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--carbon-black);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+        }
+        
+        .logo span {
+            font-weight: 400;
+            color: var(--graphite);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--graphite);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--carbon-black);
+        }
+        
+        .nav-cta {
+            padding: 10px 24px;
+            background-color: var(--carbon-black);
+            color: var(--ivory) !important;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.2s;
+        }
+        
+        .nav-cta:hover {
+            background-color: var(--champagne-gold) !important;
+            color: var(--deep-black) !important;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #000000 0%, #18181B 50%, #0a0a0a 100%);
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+        
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            filter: blur(12px);
+            transform: scale(1.1);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 0 24px;
+        }
+
+        .hero-logo {
+            max-width: 480px;
+            width: 90%;
+            height: auto;
+            margin-bottom: 32px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 700;
+            color: var(--ivory);
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero-subtitle {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: clamp(14px, 2vw, 18px);
+            font-weight: 300;
+            color: rgba(250, 250, 250, 0.8);
+            margin-bottom: 48px;
+            letter-spacing: 0.2em;
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            padding: 16px 48px;
+            background-color: transparent;
+            border: 1px solid var(--champagne-gold);
+            color: var(--champagne-gold);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .hero-cta:hover {
+            background-color: var(--champagne-gold);
+            color: var(--deep-black);
+        }
+        
+        .scroll-hint {
+            position: absolute;
+            bottom: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(250, 250, 250, 0.5);
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 120px 48px;
+        }
+        
+        .section-header {
+            margin-bottom: 80px;
+        }
+        
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--champagne-gold);
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            color: var(--carbon-black);
+            line-height: 1.1;
+        }
+        
+        /* Works Section */
+        .works {
+            background-color: var(--ivory);
+        }
+        
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+        }
+        
+        .work-card {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background-color: var(--graphite);
+            cursor: pointer;
+        }
+        
+        .work-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease, opacity 0.3s;
+        }
+        
+        .work-card:hover img {
+            transform: scale(1.05);
+            opacity: 0.7;
+        }
+        
+        .work-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 32px;
+            background: linear-gradient(transparent 0%, rgba(0,0,0,0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .work-card:hover .work-overlay {
+            opacity: 1;
+        }
+        
+        .work-category {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--champagne-gold);
+            margin-bottom: 8px;
+        }
+        
+        .work-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--ivory);
+        }
+        
+        .work-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--ivory);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .work-card:hover .work-play {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .work-play::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 18px solid var(--ivory);
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 4px;
+        }
+        
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background-color: rgba(0, 0, 0, 0.95);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-modal.active {
+            display: flex;
+        }
+        
+        .video-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1400px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .video-modal video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .video-modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            background: transparent;
+            color: var(--ivory);
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .video-modal-close:hover {
+            border-color: var(--champagne-gold);
+            color: var(--champagne-gold);
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: var(--deep-black);
+            color: var(--ivory);
+        }
+        
+        .services .section-label {
+            color: var(--champagne-gold);
+        }
+        
+        .services .section-title {
+            color: var(--ivory);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+        
+        .service-card {
+            padding: 48px 32px;
+            background-color: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            background-color: rgba(255,255,255,0.05);
+            border-color: var(--champagne-gold);
+            transform: translateY(-4px);
+        }
+        
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .service-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--champagne-gold);
+        }
+        
+        .service-title {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ivory);
+            margin-bottom: 16px;
+        }
+        
+        .service-desc {
+            font-size: 14px;
+            line-height: 1.8;
+            color: rgba(250, 250, 250, 0.6);
+        }
+        
+        /* About Section */
+        .about {
+            background-color: var(--ivory);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .about-image {
+            aspect-ratio: 4/3;
+            background-color: var(--graphite);
+            overflow: hidden;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .about-text p {
+            font-size: 16px;
+            line-height: 2;
+            color: var(--graphite);
+            margin-bottom: 24px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 48px;
+            padding-top: 48px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .stat-item {
+            text-align: left;
+        }
+        
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--carbon-black);
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--graphite);
+            margin-top: 8px;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--carbon-black);
+            color: var(--ivory);
+            text-align: center;
+        }
+        
+        .contact .section-title {
+            color: var(--ivory);
+            margin-bottom: 24px;
+        }
+        
+        .contact-subtitle {
+            font-size: 16px;
+            color: rgba(250, 250, 250, 0.6);
+            max-width: 480px;
+            margin: 0 auto 48px;
+            line-height: 1.8;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 64px;
+            margin-bottom: 48px;
+        }
+        
+        .contact-item {
+            text-align: left;
+        }
+        
+        .contact-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--champagne-gold);
+            margin-bottom: 8px;
+        }
+        
+        .contact-value {
+            font-size: 16px;
+            color: var(--ivory);
+        }
+        
+        .contact-cta {
+            display: inline-block;
+            padding: 18px 56px;
+            background-color: var(--champagne-gold);
+            color: var(--deep-black);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .contact-cta:hover {
+            background-color: var(--ivory);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 48px;
+            background-color: var(--deep-black);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: rgba(250, 250, 250, 0.3);
+            letter-spacing: 0.1em;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-links a {
+            font-size: 12px;
+            color: rgba(250, 250, 250, 0.4);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--champagne-gold);
+        }
+        
+        .footer-copyright {
+            font-size: 11px;
+            color: rgba(250, 250, 250, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 24px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            section {
+                padding: 80px 24px;
+            }
+            
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+            
+            .stats {
+                flex-wrap: wrap;
+                gap: 32px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 32px;
+                align-items: center;
+            }
+            
+            .contact-item {
+                text-align: center;
+            }
+            
+            footer {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">CANTATA<span>STUDIO</span></a>
+        <div class="nav-links">
+            <a href="#works">作品</a>
+            <a href="#services">服务</a>
+            <a href="#about">关于</a>
+            <a href="#contact" class="nav-cta">联系我们</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="assets/images/logo-hero.png" alt="CANTATA" class="hero-logo">
+            <p class="hero-subtitle">用影像讲述品牌故事</p>
+            <a href="#contact" class="hero-cta">开始合作</a>
+        </div>
+        <div class="scroll-hint">向下滚动</div>
+    </section>
+
+    <!-- Works -->
+    <section class="works" id="works">
+        <div class="section-header">
+            <div class="section-label">Selected Works</div>
+            <h2 class="section-title">精选作品</h2>
+        </div>
+        
+        <div class="works-grid">
+            <div class="work-card" data-video="assets/videos/canon-summer.mp4">
+                <img src="assets/works/canon-summer.jpg" alt="品牌广告">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">佳能 · 热爱每一帧</div>
+                </div>
+            </div>
+            
+            <div class="work-card" data-video="assets/videos/em-smart.mp4">
+                <img src="assets/works/em-smart.jpg" alt="企业宣传片">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">企业宣传</div>
+                    <div class="work-title">EM-Smart 激光雕刻机</div>
+                </div>
+            </div>
+            
+            <div class="work-card" data-video="assets/videos/guojing-mv.mov">
+                <img src="assets/works/guojing-mv.jpg" alt="音乐MV">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">音乐MV</div>
+                    <div class="work-title">郭静 · 天亮之前</div>
+                </div>
+            </div>
+            
+            <div class="work-card" data-video="assets/videos/jishou-travel.mp4">
+                <img src="assets/works/jishou-travel.jpg" alt="文旅宣传">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">文旅宣传</div>
+                    <div class="work-title">吉首 · 等候君来</div>
+                </div>
+            </div>
+            
+            <div class="work-card" data-video="assets/videos/keqiao-ancient.mp4">
+                <img src="assets/works/keqiao-ancient.jpg" alt="古镇宣传">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">文旅宣传</div>
+                    <div class="work-title">柯桥古镇 · 江南水韵</div>
+                </div>
+            </div>
+            
+            <div class="work-card" data-video="assets/videos/puqi-hotel.m4v">
+                <img src="assets/works/puqi-hotel.jpg" alt="酒店宣传">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">酒店宣传</div>
+                    <div class="work-title">璞祺意境 · 先导片</div>
+                </div>
+            </div>
+            <div class="work-card" data-video="assets/videos/miaoqing-concept.mp4">
+                <img src="assets/works/canon-solar.jpg" alt="描青概念片">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">概念短片</div>
+                    <div class="work-title">描青 · 概念片</div>
+                </div>
+            </div>
+            <div class="work-card" data-video="assets/videos/mingdu-home.mp4">
+                <img src="assets/works/meihua-zhou.jpg" alt="铭都家居">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">企业宣传</div>
+                    <div class="work-title">铭都家居 · 定稿</div>
+                </div>
+            </div>
+            <div class="work-card" data-video="assets/videos/baojiajie-blue.mp4">
+                <img src="assets/works/brand-story.jpg" alt="宝家洁">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">产品广告</div>
+                    <div class="work-title">宝家洁 · 横版蓝底</div>
+                </div>
+            </div>
+            <div class="work-card" data-video="assets/videos/spring-tour-doc.mp4">
+                <img src="assets/works/event-record.jpg" alt="春游纪录片">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">纪录片</div>
+                    <div class="work-title">春游 · 纪录片 P1</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <div class="section-label">What We Do</div>
+            <h2 class="section-title">服务内容</h2>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <rect x="2" y="3" width="20" height="14" rx="2"/>
+                        <path d="M8 21h8M12 17v4"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">企业宣传片</h3>
+                <p class="service-desc">为企业量身打造品牌形象片，从脚本创意到后期制作全流程服务，展现企业核心价值。</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">商业广告片（TVC）</h3>
+                <p class="service-desc">电影级制作标准，让品牌广告更具感染力和传播力，触达目标受众。</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <path d="M9 18V5l12-2v13"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <circle cx="18" cy="16" r="3"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">音乐MV</h3>
+                <p class="service-desc">用镜头语言诠释音乐情感，打造视觉与听觉的双重艺术体验。</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <circle cx="12" cy="8" r="5"/>
+                        <path d="M20 21a8 8 0 0 0-16 0"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">IP打造</h3>
+                <p class="service-desc">从零构建个人/品牌IP的视觉体系，打造独特的内容辨识度和影响力。</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <path d="M3 21h18M5 21V7l8-4v18M13 21V7l6 4v10"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">文旅宣传片</h3>
+                <p class="service-desc">展现城市、景区、文化项目的独特魅力，助力文旅品牌传播。</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">活动记录</h3>
+                <p class="service-desc">专业团队记录企业活动、会议、发布会等重要时刻，留下珍贵影像记忆。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <div class="about-image">
+                <img src="assets/images/about-cantata.jpg" alt="CANTATA Studio 团队">
+            </div>
+            <div class="about-text">
+                <div class="section-label">About Us</div>
+                <h2 class="section-title" style="margin-bottom: 32px;">关于 CANTATA</h2>
+                <p>CANTATA Studio 是一支专业的影视制作团队，专注于企业宣传片、商业广告片、音乐MV、IP打造等领域。</p>
+                <p>我们相信，好的影像不只是画面，更是故事。每一帧都承载着品牌的价值与情感，每一个镜头都讲述着独特的故事。</p>
+                <p>从脚本创意到后期制作，我们提供全流程服务，用专业打动客户，用作品说话。</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">8+</div>
+                        <div class="stat-label">年行业经验</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">完成项目</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">合作品牌</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="section-label">Get In Touch</div>
+        <h2 class="section-title">开始合作</h2>
+        <p class="contact-subtitle">无论是企业宣传片、品牌广告还是音乐MV，我们都能为您量身定制专业的影像解决方案。</p>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <div class="contact-label">邮箱</div>
+                <div class="contact-value">hello@cantata.studio</div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-label">电话</div>
+                <div class="contact-value">+86 138-0000-0000</div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-label">地址</div>
+                <div class="contact-value">浙江省杭州市萧山区五七公社五幢二楼</div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-label">小红书</div>
+                <div class="contact-value"><a href="https://xhslink.com/m/1U3K3cNQAfz" target="_blank" style="color: var(--ivory); text-decoration: none; border-bottom: 1px solid var(--champagne-gold);">@CANTATA影视工作室</a></div>
+            </div>
+        </div>
+        
+        <a href="mailto:hello@cantata.studio" class="contact-cta">发送合作意向</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">CANTATA STUDIO</div>
+        <div class="footer-links">
+            <a href="https://xhslink.com/m/1U3K3cNQAfz" target="_blank">小红书</a>
+            <a href="#">公众号</a>
+            <a href="#">B站</a>
+        </div>
+        <div class="footer-copyright">© 2026 CANTATA Studio. All rights reserved.</div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Video Modal
+        const modal = document.createElement('div');
+        modal.className = 'video-modal';
+        modal.innerHTML = `
+            <div class="video-modal-content">
+                <button class="video-modal-close">×</button>
+                <video controls autoplay></video>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        
+        const modalVideo = modal.querySelector('video');
+        const closeBtn = modal.querySelector('.video-modal-close');
+        
+        // Open modal on work card click
+        document.querySelectorAll('.work-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const videoSrc = card.dataset.video;
+                if (videoSrc) {
+                    modalVideo.src = videoSrc;
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        // Close modal
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            modalVideo.pause();
+            modalVideo.src = '';
+            document.body.style.overflow = '';
+        });
+        
+        // Close on background click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.src = '';
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.src = '';
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+</html>

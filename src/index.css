@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-deepblack text-ivory font-body antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display font-medium tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-8 py-3 bg-ivory text-charcoal font-body font-medium tracking-wide 
+           transition-all duration-300 hover:bg-champagne hover:text-deepblack
+           cursor-pointer;
+  }
+
+  .btn-outline {
+    @apply px-8 py-3 border border-ivory/30 text-ivory font-body font-medium tracking-wide
+           transition-all duration-300 hover:border-champagne hover:text-champagne
+           cursor-pointer;
+  }
+
+  .nav-link {
+    @apply text-sm font-body tracking-wide text-ivory/70 transition-colors duration-200
+           hover:text-champagne cursor-pointer;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-display text-ivory mb-6;
+  }
+
+  .section-subtitle {
+    @apply text-base md:text-lg text-ivory/60 max-w-xl;
+  }
+
+  .card {
+    @apply bg-charcoal/50 border border-graphite/30 
+           transition-all duration-300 hover:border-champagne/50;
+  }
+
+  .work-card {
+    @apply group relative overflow-hidden cursor-pointer;
+  }
+
+  .work-card-overlay {
+    @apply absolute inset-0 bg-deepblack/80 opacity-0 group-hover:opacity-100
+           transition-opacity duration-300 flex items-center justify-center;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-ivory to-champagne;
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #18181B;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3D3D3D;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C9A87C;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
