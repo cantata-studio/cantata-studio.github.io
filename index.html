@@ -72,6 +72,20 @@
             align-items: center;
             transition: all 0.3s ease;
         }
+
+        /* ── 深色背景（Hero 视频上）：白色字 ── */
+        nav:not(.scrolled) .logo {
+            color: #fff;
+        }
+        nav:not(.scrolled) .logo span {
+            color: rgba(255,255,255,0.7);
+        }
+        nav:not(.scrolled) .nav-links a {
+            color: rgba(255,255,255,0.85);
+        }
+        nav:not(.scrolled) .nav-links a:hover {
+            color: #fff;
+        }
         
         nav.scrolled {
             background-color: rgba(250, 250, 250, 0.95);
@@ -79,19 +93,33 @@
             padding: 16px 48px;
             box-shadow: 0 1px 0 rgba(0,0,0,0.05);
         }
+
+        /* ── 浅色背景（滚动后）：黑色字 ── */
+        nav.scrolled .logo {
+            color: var(--carbon-black);
+        }
+        nav.scrolled .logo span {
+            color: var(--graphite);
+        }
+        nav.scrolled .nav-links a {
+            color: var(--graphite);
+        }
+        nav.scrolled .nav-links a:hover {
+            color: var(--carbon-black);
+        }
         
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 20px;
             font-weight: 700;
-            color: var(--carbon-black);
             text-decoration: none;
             letter-spacing: 0.1em;
+            transition: color 0.3s ease;
         }
         
         .logo span {
             font-weight: 400;
-            color: var(--graphite);
+            transition: color 0.3s ease;
         }
         
         .nav-links {
@@ -103,29 +131,37 @@
         .nav-links a {
             font-size: 13px;
             font-weight: 500;
-            color: var(--graphite);
             text-decoration: none;
             letter-spacing: 0.05em;
             transition: color 0.2s;
         }
         
-        .nav-links a:hover {
-            color: var(--carbon-black);
-        }
-        
         .nav-cta {
             padding: 10px 24px;
-            background-color: var(--carbon-black);
-            color: var(--ivory) !important;
             border-radius: 2px;
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
+            /* 深色 Hero 上默认：描边白色 */
+            background-color: transparent;
+            color: #fff !important;
+            border: 1px solid rgba(255,255,255,0.7);
         }
-        
         .nav-cta:hover {
+            background-color: rgba(255,255,255,0.15) !important;
+            border-color: #fff;
+            color: #fff !important;
+        }
+
+        /* 滚动后切成实色按钮 */
+        nav.scrolled .nav-cta {
+            background-color: var(--carbon-black) !important;
+            color: var(--ivory) !important;
+            border: 1px solid transparent;
+        }
+        nav.scrolled .nav-cta:hover {
             background-color: var(--champagne-gold) !important;
             color: var(--deep-black) !important;
         }
