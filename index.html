@@ -138,29 +138,49 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: linear-gradient(135deg, #000000 0%, #18181B 50%, #0a0a0a 100%);
+            background: #000;
         }
-        
-        .hero-video {
+
+        /* 视频背景容器 */
+        .hero-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
+            inset: 0;
+            z-index: 0;
         }
-        
+
+        /* 每个背景视频片段 */
+        .hero-bg-video {
+            position: absolute;
+            inset: -5%;           /* 略大于容器，防止模糊边缘露白 */
+            width: 110%;
+            height: 110%;
+            object-fit: cover;
+            filter: blur(18px);
+            transform: scale(1.05);
+            opacity: 0;
+            transition: opacity 1.8s ease;
+            pointer-events: none;
+        }
+
+        .hero-bg-video.active {
+            opacity: 1;
+        }
+
+        /* 深色遮罩：保证文字可读 */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.55) 0%,
+                rgba(0,0,0,0.45) 50%,
+                rgba(0,0,0,0.65) 100%
+            );
+        }
+
         .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.2;
-            filter: blur(12px);
-            transform: scale(1.1);
+            display: none; /* 用视频背景代替静态图 */
         }
         
         .hero-content {
@@ -683,6 +703,24 @@
 
     <!-- Hero -->
     <section class="hero">
+        <!-- 视频背景层 -->
+        <div class="hero-bg">
+            <video class="hero-bg-video active" muted playsinline preload="auto" loop
+                src="https://cantata-videos-1417953931.cos.ap-shanghai.myqcloud.com/%E6%8F%8F%E9%9D%92%E6%A6%82%E5%BF%B5%E7%89%87.MOV">
+            </video>
+            <video class="hero-bg-video" muted playsinline preload="none"
+                src="https://cantata-videos-1417953931.cos.ap-shanghai.myqcloud.com/%E5%B0%8F%E7%B1%B32024%E5%9B%BD%E5%BA%86-%E6%81%B0%E5%99%B6-%E6%9C%80%E7%BB%884k.mov">
+            </video>
+            <video class="hero-bg-video" muted playsinline preload="none"
+                src="https://cantata-videos-1417953931.cos.ap-shanghai.myqcloud.com/%E5%90%89%E9%A6%96%E6%96%87%E6%97%85%E6%96%B0%E7%89%87%E5%9C%BA.mp4">
+            </video>
+            <video class="hero-bg-video" muted playsinline preload="none"
+                src="https://cantata-videos-1417953931.cos.ap-shanghai.myqcloud.com/%E4%BD%B3%E8%83%BD%E4%B8%AD%E5%9B%BD%E7%83%AD%E7%88%B1%E6%AF%8F%E4%B8%80%E5%B8%A7-%E5%A4%8F%E6%97%A5%E7%AF%87.MP4">
+            </video>
+        </div>
+        <!-- 遮罩层 -->
+        <div class="hero-overlay"></div>
+        <!-- 文字内容 -->
         <div class="hero-content">
             <img src="assets/images/logo-hero.png" alt="CANTATA" class="hero-logo">
             <p class="hero-subtitle">用影像讲述品牌故事</p>
@@ -933,6 +971,54 @@
     </footer>
 
     <script>
+        // ── Hero 背景视频轮播 ──────────────────────────────────
+        (function initHeroBg() {
+            const videos = Array.from(document.querySelectorAll('.hero-bg-video'));
+            if (!videos.length) return;
+
+            let current = 0;
+            const DISPLAY_MS = 8000;   // 每段视频展示时长（ms）
+            const FADE_MS   = 1800;    // 与 CSS transition 保持一致
+
+            // 启动第一个视频
+            videos[0].play().catch(() => {});
+
+            function switchTo(next) {
+                const prev = videos[current];
+                const nextVid = videos[next];
+
+                // 预加载下一个
+                nextVid.preload = 'auto';
+                nextVid.load();
+
+                // 等视频可以播放再切换
+                function doSwitch() {
+                    nextVid.currentTime = 0;
+                    nextVid.play().catch(() => {});
+                    nextVid.classList.add('active');
+                    // 旧视频淡出
+                    setTimeout(() => {
+                        prev.classList.remove('active');
+                        // 彻底淡出后暂停，释放解码资源
+                        setTimeout(() => { prev.pause(); }, FADE_MS + 200);
+                    }, 50);
+                    current = next;
+                }
+
+                if (nextVid.readyState >= 3) {
+                    doSwitch();
+                } else {
+                    nextVid.addEventListener('canplay', doSwitch, { once: true });
+                }
+            }
+
+            setInterval(() => {
+                const next = (current + 1) % videos.length;
+                switchTo(next);
+            }, DISPLAY_MS);
+        })();
+        // ─────────────────────────────────────────────────────────
+
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
