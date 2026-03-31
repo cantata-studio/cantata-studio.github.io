@@ -971,14 +971,38 @@
         const modalVideo = modal.querySelector('video');
         const closeBtn = modal.querySelector('.video-modal-close');
         
-        // Open video in new tab on work card click (avoids Mixed Content restrictions)
+        // Play video in modal overlay (COS HTTPS + CORS configured)
         document.querySelectorAll('.work-card').forEach(card => {
             card.addEventListener('click', () => {
                 const videoSrc = card.dataset.video;
                 if (videoSrc) {
-                    window.open(videoSrc, '_blank');
+                    modalVideo.src = videoSrc;
+                    modal.classList.add('active');
+                    modalVideo.play();
                 }
             });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            modalVideo.pause();
+            modalVideo.src = '';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.src = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.src = '';
+            }
         });
     </script>
 </body>
