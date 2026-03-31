@@ -971,44 +971,14 @@
         const modalVideo = modal.querySelector('video');
         const closeBtn = modal.querySelector('.video-modal-close');
         
-        // Open modal on work card click
+        // Open video in new tab on work card click (avoids Mixed Content restrictions)
         document.querySelectorAll('.work-card').forEach(card => {
             card.addEventListener('click', () => {
                 const videoSrc = card.dataset.video;
                 if (videoSrc) {
-                    modalVideo.src = videoSrc;
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
+                    window.open(videoSrc, '_blank');
                 }
             });
-        });
-        
-        // Close modal
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
-            modalVideo.pause();
-            modalVideo.src = '';
-            document.body.style.overflow = '';
-        });
-        
-        // Close on background click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                modalVideo.pause();
-                modalVideo.src = '';
-                document.body.style.overflow = '';
-            }
-        });
-        
-        // Close on ESC key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                modal.classList.remove('active');
-                modalVideo.pause();
-                modalVideo.src = '';
-                document.body.style.overflow = '';
-            }
         });
     </script>
 </body>
