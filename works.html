@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品集 | CANTATA Studio</title>
+    <meta name="description" content="CANTATA Studio 作品集 — 品牌广告、企业宣传、文旅宣传、纪录片、概念短片。">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "作品集 | CANTATA Studio",
+      "url": "https://cantata-studio.net/works.html",
+      "description": "CANTATA Studio 作品集 — 品牌广告、企业宣传、文旅宣传、纪录片、概念短片。",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "CANTATA Studio",
+        "url": "https://cantata-studio.net"
+      }
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --carbon-black: #18181B;
+            --deep-black: #000000;
+            --graphite: #27272A;
+            --ivory: #FAFAFA;
+            --champagne-gold: #C9A87C;
+            --warm-gold: #B8956B;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+            background-color: var(--ivory);
+            color: var(--carbon-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--carbon-black);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+        }
+        
+        .logo span {
+            font-weight: 400;
+            color: var(--graphite);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--graphite);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--carbon-black);
+        }
+        
+        .nav-cta {
+            padding: 10px 24px;
+            background-color: var(--carbon-black);
+            color: var(--ivory) !important;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.2s;
+        }
+        
+        .nav-cta:hover {
+            background-color: var(--champagne-gold) !important;
+            color: var(--deep-black) !important;
+        }
+        
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 28px;
+            height: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1100;
+            padding: 0;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--carbon-black);
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.97);
+            z-index: 1050;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 36px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-menu.active {
+            display: flex;
+            opacity: 1;
+        }
+        .mobile-menu a {
+            font-size: 20px;
+            color: var(--ivory);
+            text-decoration: none;
+            letter-spacing: 0.08em;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .mobile-menu a:hover {
+            color: var(--champagne-gold);
+        }
+        .mobile-menu .mobile-cta {
+            margin-top: 8px;
+            padding: 14px 40px;
+            border: 1px solid var(--champagne-gold);
+            color: var(--champagne-gold) !important;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border-radius: 2px;
+        }
+        .mobile-menu .mobile-cta:hover {
+            background: var(--champagne-gold);
+            color: var(--deep-black) !important;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 160px 48px 80px;
+            text-align: center;
+        }
+        
+        .page-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--champagne-gold);
+            margin-bottom: 16px;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 700;
+            color: var(--carbon-black);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+        
+        .page-desc {
+            font-size: 16px;
+            color: var(--graphite);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        /* Filter Tabs */
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 0 48px 60px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 24px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            border: 1px solid rgba(0,0,0,0.12);
+            background: transparent;
+            color: var(--graphite);
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.25s;
+            font-family: 'Noto Sans SC', 'Inter', sans-serif;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--carbon-black);
+            color: var(--carbon-black);
+        }
+        
+        .filter-btn.active {
+            background-color: var(--carbon-black);
+            border-color: var(--carbon-black);
+            color: var(--ivory);
+        }
+        
+        .filter-count {
+            display: inline-block;
+            margin-left: 6px;
+            font-weight: 400;
+            opacity: 0.6;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            padding: 0 48px 32px;
+        }
+        .search-input {
+            width: 100%;
+            max-width: 480px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-family: 'Noto Sans SC', 'Inter', sans-serif;
+            border: 1px solid rgba(0,0,0,0.12);
+            border-radius: 2px;
+            background: var(--ivory);
+            color: var(--carbon-black);
+            outline: none;
+            transition: border-color 0.25s;
+        }
+        .search-input::placeholder {
+            color: rgba(0,0,0,0.3);
+        }
+        .search-input:focus {
+            border-color: var(--carbon-black);
+        }
+        
+        /* Works Grid */
+        .works-container {
+            padding: 0 48px 120px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 24px;
+        }
+        
+        .work-card {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background-color: var(--graphite);
+            cursor: pointer;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        
+        .work-card.hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+            position: absolute;
+            visibility: hidden;
+        }
+        
+        .work-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease, opacity 0.3s;
+        }
+        
+        .work-card:hover img {
+            transform: scale(1.05);
+            opacity: 0.7;
+        }
+        
+        .work-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 32px;
+            background: linear-gradient(transparent 0%, rgba(0,0,0,0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .work-card:hover .work-overlay {
+            opacity: 1;
+        }
+        
+        .work-category {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--champagne-gold);
+            margin-bottom: 8px;
+        }
+        
+        .work-title {
+            font-family: 'Playfair Display', 'Noto Sans SC', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--ivory);
+        }
+        
+        .work-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 72px;
+            height: 72px;
+            border: 2px solid var(--ivory);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .work-card:hover .work-play {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .work-play::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 16px solid var(--ivory);
+            border-top: 11px solid transparent;
+            border-bottom: 11px solid transparent;
+            margin-left: 4px;
+        }
+        
+        /* Category Section Headers (shown in "all" view) */
+        .category-header {
+            grid-column: 1 / -1;
+            padding: 48px 0 16px;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .category-header:first-child {
+            border-top: none;
+            padding-top: 0;
+        }
+        
+        .category-header-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--champagne-gold);
+            margin-bottom: 8px;
+        }
+        
+        .category-header-title {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--carbon-black);
+        }
+        
+        .category-header-count {
+            font-size: 14px;
+            color: var(--graphite);
+            font-weight: 400;
+            margin-left: 12px;
+        }
+        
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background-color: rgba(0, 0, 0, 0.95);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-modal.active {
+            display: flex;
+        }
+        
+        .video-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1400px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .video-modal video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .video-modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            background: transparent;
+            color: var(--ivory);
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .video-modal-close:hover {
+            border-color: var(--champagne-gold);
+            color: var(--champagne-gold);
+        }
+        
+        /* No results */
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 80px 24px;
+            color: var(--graphite);
+            font-size: 16px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 48px;
+            background-color: var(--deep-black);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: rgba(250, 250, 250, 0.3);
+            letter-spacing: 0.1em;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-links a {
+            font-size: 12px;
+            color: rgba(250, 250, 250, 0.4);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--champagne-gold);
+        }
+        
+        .footer-copyright {
+            font-size: 11px;
+            color: rgba(250, 250, 250, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 24px;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-links {
+                display: none !important;
+            }
+            
+            .page-header {
+                padding: 120px 24px 48px;
+            }
+            
+            .filter-bar {
+                padding: 0 24px 40px;
+                gap: 6px;
+            }
+            
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 11px;
+            }
+            
+            .works-container {
+                padding: 0 24px 80px;
+            }
+            
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            footer {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+                padding: 32px 24px;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .works-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="index.html" class="logo">CANTATA<span>STUDIO</span></a>
+        <div class="nav-links">
+            <a href="works.html" style="color: var(--carbon-black);">作品</a>
+            <a href="index.html#services">服务</a>
+            <a href="index.html#about">关于</a>
+            <a href="index.html#contact" class="nav-cta">联系我们</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="works.html">作品</a>
+        <a href="index.html#services">服务</a>
+        <a href="index.html#about">关于</a>
+        <a href="index.html#contact" class="mobile-cta">联系我们</a>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-label">Our Works</div>
+        <h1 class="page-title">作品集</h1>
+        <p class="page-desc">从品牌广告到纪录片，从企业宣传到概念短片，每一部作品都倾注了我们对影像的热爱与执着。</p>
+    </div>
+
+    <!-- Filter -->
+    <div class="search-bar">
+        <input type="text" class="search-input" id="searchInput" placeholder="搜索品牌或作品名称…">
+    </div>
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">全部 <span class="filter-count"></span></button>
+        <button class="filter-btn" data-filter="brand">品牌广告 <span class="filter-count"></span></button>
+        <button class="filter-btn" data-filter="canon">品牌营销短视频 <span class="filter-count"></span></button>
+        <button class="filter-btn" data-filter="corporate">企业宣传 <span class="filter-count"></span></button>
+        <button class="filter-btn" data-filter="travel">文旅宣传 <span class="filter-count"></span></button>
+        <button class="filter-btn" data-filter="documentary">纪录片 <span class="filter-count"></span></button>
+        <button class="filter-btn" data-filter="concept">概念短片 <span class="filter-count"></span></button>
+    </div>
+
+    <!-- Works Grid -->
+    <div class="works-container">
+        <div class="works-grid" id="worksGrid">
+
+            <!-- ========== 品牌广告 ========== -->
+            <div class="category-header" data-category="brand">
+                <div class="category-header-label">Brand Commercial</div>
+                <h2 class="category-header-title">品牌广告<span class="category-header-count"></span></h2>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/miaoqing-concept.mp4">
+                <img src="assets/works/miaoqing-concept.jpg" alt="描青概念片" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">描青 · 概念片</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/baojiayi.mp4">
+                <img src="assets/works/baojiajie.jpg" alt="宝家洁" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">宝家洁</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/xiaomi-chiaga.mp4">
+                <img src="assets/works/xiaomi-chiaga-13s.jpg" alt="小米恰噶" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">小米「恰噶」</div>
+                </div>
+            </div>
+
+            <!-- ========== 品牌营销短视频（佳能中国） ========== -->
+            <div class="category-header" data-category="canon">
+                <div class="category-header-label">Canon China - Short Videos</div>
+                <h2 class="category-header-title">品牌营销短视频<span class="category-header-count"></span></h2>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-summer.mp4">
+                <img src="assets/works/canon-summer.jpg" alt="佳能夏日篇" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 热爱每一帧（夏日篇）</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-spring.mp4">
+                <img src="assets/works/canon-spring.jpg" alt="佳能春日篇" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 热爱每一帧（春日篇）</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-shanshan.mp4">
+                <img src="assets/works/canon-art-museum.jpg" alt="佳能山下美术馆" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 热爱每一帧（山下美术馆）</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-ocean.mp4">
+                <img src="assets/works/canon-aquarium.jpg" alt="佳能海洋馆" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 热爱每一帧（海洋馆）</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-chushu.mp4">
+                <img src="assets/works/canon-chushu.jpg" alt="佳能二十四节气处暑" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 二十四节气（处暑）</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-xiazhi.mp4">
+                <img src="assets/works/canon-xiazhi.jpg" alt="佳能二十四节气夏至" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 二十四节气（夏至）</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-dashu.mp4">
+                <img src="assets/works/canon-dashu.jpg" alt="佳能二十四节气大暑" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 二十四节气（大暑）</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-qiufen.mp4">
+                <img src="assets/works/canon-qiufen.jpg" alt="佳能二十四节气秋分" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 二十四节气（秋分）</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-shuangjiang.mp4">
+                <img src="assets/works/canon-shuangjiang.jpg" alt="佳能二十四节气霜降" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 二十四节气（霜降）</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-shengjian.mp4">
+                <img src="assets/works/canon-shengjian.jpg" alt="佳能美食篇生煎" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 美食篇（生煎）</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-mixian.mp4">
+                <img src="assets/works/canon-mixian.jpg" alt="佳能美食篇米线" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 美食篇（米线）</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-congbaohui.mp4">
+                <img src="assets/works/canon-congbaohuan.jpg" alt="佳能美食篇葱包烩" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 美食篇（葱包烩）</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="canon" data-video="https://cantata-studio.net/canon-danhuang.mp4">
+                <img src="assets/works/canon-longjiang.jpg" alt="佳能美食篇龙井豆浆" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌营销短视频</div>
+                    <div class="work-title">佳能 · 美食篇（龙井豆浆）</div>
+                </div>
+            </div>
+
+            <!-- ========== 品牌广告（续） ========== -->
+            <div class="category-header" data-category="brand">
+                <div class="category-header-label">Brand Commercial</div>
+                <h2 class="category-header-title">品牌广告<span class="category-header-count"></span></h2>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/ouyou.mp4">
+                <img src="assets/works/ouyou-luggage.jpg" alt="欧优行李箱" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">欧优行李箱</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/zhenbuer.mp4">
+                <img src="assets/works/zhenbuer-tvc.jpg" alt="真不二TVC" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">真不二 TVC</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/fazhifa-teaser.mp4">
+                <img src="assets/works/fazhifa-preview.jpg" alt="发知发·先导片" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">发知发 · 先导片</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/mingdu-home.mp4">
+                <img src="assets/works/mingdu-cover-8s.jpg" alt="铭都家居" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">铭都家居</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/em-smart.mp4">
+                <img src="assets/works/em-smart.jpg" alt="EM-Smart" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">EM-Smart 激光雕刻机</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/tianmao-duzou.mp4">
+                <img src="assets/works/tianmao-duzou.jpg" alt="天猫宝藏新品牌·独奏" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">天猫宝藏新品牌 · 独奏</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/usmile-u7-product.mp4">
+                <img src="assets/works/usmile-u7-product.jpg" alt="usmile U7 Pro 产品篇" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">usmile U7 Pro · 产品篇</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/usmile-u7-feature.mp4">
+                <img src="assets/works/usmile-u7-feature.jpg" alt="usmile U7 Pro 功能篇" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">usmile U7 Pro · 功能篇</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/pingan-qingdan.mp4">
+                <img src="assets/works/pingan-qingdan.jpg" alt="中国平安·一份待完成的清单" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">中国平安 · 一份待完成的清单</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/casarte-milan.mp4">
+                <img src="assets/works/casarte-milan.jpg" alt="卡萨帝·米兰设计周" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">卡萨帝 · 米兰设计周</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/flyco-u1.mp4">
+                <img src="assets/works/flyco-u1.jpg" alt="飞科U1 剃须刀" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">飞科 U1 剃须刀</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/shark-v5.mp4">
+                <img src="assets/works/shark-v5.jpg" alt="shark V5 拖把" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">shark V5 拖把</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="brand" data-video="https://cantata-studio.net/panasonic-v2.mp4">
+                <img src="assets/works/panasonic-v2.jpg" alt="松下剃须刀V2" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">松下剃须刀 V2</div>
+                </div>
+            </div>
+
+            <!-- ========== 企业宣传 ========== -->
+            <div class="category-header" data-category="corporate">
+                <div class="category-header-label">Corporate Video</div>
+                <h2 class="category-header-title">企业宣传<span class="category-header-count"></span></h2>
+            </div>
+
+            <div class="work-card" data-category="corporate" data-video="https://cantata-studio.net/mingdu-mingming.mp4">
+                <img src="assets/works/mingdu-moomin.jpg" alt="铭都家居 x 姆明动画版" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">企业宣传</div>
+                    <div class="work-title">铭都家居 x 姆明动画版</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="corporate" data-video="https://cantata-studio.net/shaoxi.mp4">
+                <img src="assets/works/shaozhi-promo.jpg" alt="绍职院招生宣传片" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">企业宣传</div>
+                    <div class="work-title">绍职院 · 招生宣传片</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="corporate" data-video="https://cantata-studio.net/zjcm-dingbuqiao.mp4">
+                <img src="assets/works/zjcm-dingbuqiao.jpg" alt="浙江音乐学院《碇步桥》" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">企业宣传</div>
+                    <div class="work-title">浙江音乐学院《碇步桥》</div>
+                </div>
+            </div>
+
+            <!-- ========== 文旅宣传 ========== -->
+            <div class="category-header" data-category="travel">
+                <div class="category-header-label">Travel & Tourism</div>
+                <h2 class="category-header-title">文旅宣传<span class="category-header-count"></span></h2>
+            </div>
+
+            <div class="work-card" data-category="travel" data-video="https://cantata-studio.net/jishou-travel.mp4">
+                <img src="assets/works/jishou-travel.jpg" alt="吉首文旅" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">文旅宣传</div>
+                    <div class="work-title">吉首 · 等候君来</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="travel" data-video="https://cantata-studio.net/meihuaizhou.mp4">
+                <img src="assets/works/meihua-zhou.jpg" alt="嘉兴梅花洲" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">文旅宣传</div>
+                    <div class="work-title">文旅片 · 嘉兴梅花洲</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="travel" data-video="https://cantata-studio.net/keqiaoguzhen.mp4">
+                <img src="assets/works/keqiao-ancient.jpg" alt="柯桥古镇" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">文旅宣传</div>
+                    <div class="work-title">文旅片 · 柯桥古镇</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="travel" data-video="https://cantata-studio.net/jinhua-baxian.mp4">
+                <img src="assets/works/jinhua-baxian.jpg" alt="金华八仙积道" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">文旅宣传</div>
+                    <div class="work-title">文旅片 · 金华八仙积道</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="travel" data-video="https://cantata-studio.net/changshan.mp4">
+                <img src="assets/works/changshan-kaiyuan.jpg" alt="常山开元文旅" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">文旅宣传</div>
+                    <div class="work-title">常山开元文旅</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="travel" data-video="https://cantata-studio.net/sichuan-travel.mp4">
+                <img src="assets/works/sichuan-travel.jpg" alt="安逸四川·同城旅行" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">文旅宣传</div>
+                    <div class="work-title">安逸四川 · 同城旅行</div>
+                </div>
+            </div>
+
+            <div class="category-header" data-category="documentary">
+                <div class="category-header-label">Documentary</div>
+                <h2 class="category-header-title">纪录片<span class="category-header-count"></span></h2>
+            </div>
+
+            <div class="work-card" data-category="documentary" data-video="https://cantata-studio.net/spring-tour.mp4">
+                <img src="assets/works/chunyou-doc.jpg" alt="徐秉龙春游纪录片" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">纪录片</div>
+                    <div class="work-title">徐秉龙春游纪录片</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="documentary" data-video="https://cantata-studio.net/tongyu-datong.mp4">
+                <img src="assets/works/tongyudatong.jpg" alt="同与大通" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">纪录片</div>
+                    <div class="work-title">同与大通 · 姚建伟纪录片</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="documentary" data-video="https://cantata-studio.net/luobuzhen.mp4">
+                <img src="assets/works/luobuzhen-doc.jpg" alt="罗步臻纪录片" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">纪录片</div>
+                    <div class="work-title">罗步臻 · 纪录片</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="documentary" data-video="https://cantata-studio.net/wuyu-shenwei.mp4">
+                <img src="assets/works/wuling-shenwei.jpg" alt="舞零展览沈伟篇" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">纪录片</div>
+                    <div class="work-title">舞零展览 · 沈伟篇</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="documentary" data-video="https://cantata-studio.net/wuyu-lixinyang.mp4">
+                <img src="assets/works/wuling-lixinyang.jpg" alt="舞零展览郦昕阳篇" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">纪录片</div>
+                    <div class="work-title">舞零展览 · 郦昕阳篇</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="documentary" data-video="https://cantata-studio.net/wuyu-chenjianming.mp4">
+                <img src="assets/works/wuling-chenjianming.jpg" alt="舞零展览陈建明篇" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">纪录片</div>
+                    <div class="work-title">舞零展览 · 陈建明篇</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="documentary" data-video="https://cantata-studio.net/wuyu-baoxianlun.mp4">
+                <img src="assets/works/wuling-baoxianlun.jpg" alt="舞零展览鲍贤伦篇" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">纪录片</div>
+                    <div class="work-title">舞零展览 · 鲍贤伦篇</div>
+                </div>
+            </div>
+
+            <!-- ========== 概念短片 ========== -->
+            <div class="category-header" data-category="concept">
+                <div class="category-header-label">Concept Film</div>
+                <h2 class="category-header-title">概念短片<span class="category-header-count"></span></h2>
+            </div>
+
+            <div class="work-card" data-category="concept" data-video="https://cantata-studio.net/cici.mp4">
+                <img src="assets/works/cici-concept.jpg" alt="艺人拍摄cici" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">概念短片</div>
+                    <div class="work-title">艺人拍摄 · CICI</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="concept" data-video="https://cantata-studio.net/tianliang.mp4">
+                <img src="assets/works/before-dawn.jpg" alt="天亮之前" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">概念短片</div>
+                    <div class="work-title">天亮之前</div>
+                </div>
+            </div>
+
+            <div class="work-card" data-category="corporate" data-video="https://cantata-studio.net/puqi-teaser.mp4">
+                <img src="assets/works/puqi-hotel.jpg" alt="璞祺意境先导片" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">企业宣传</div>
+                    <div class="work-title">璞祺意境 · 先导片</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="no-results" id="noResults">未找到匹配的作品，换个关键词试试？</div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">CANTATA STUDIO</div>
+        <div class="footer-links">
+            <a href="https://xhslink.com/m/1U3K3cNQAfz" target="_blank">小红书</a>
+            <a href="#">公众号</a>
+            <a href="#">B站</a>
+        </div>
+        <div class="footer-copyright">&copy; 2026 CANTATA Studio. All rights reserved.</div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // === Filter Logic ===
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const workCards = document.querySelectorAll('.work-card');
+        const categoryHeaders = document.querySelectorAll('.category-header');
+        const grid = document.getElementById('worksGrid');
+
+        // Count works per category
+        function countByCategory(cat) {
+            return document.querySelectorAll('.work-card[data-category="' + cat + '"]').length;
+        }
+
+        // Update filter button counts
+        function updateCounts() {
+            const totalCount = workCards.length;
+            document.querySelector('[data-filter="all"] .filter-count').textContent = totalCount;
+            document.querySelector('[data-filter="brand"] .filter-count').textContent = countByCategory('brand');
+            document.querySelector('[data-filter="canon"] .filter-count').textContent = countByCategory('canon');
+            document.querySelector('[data-filter="corporate"] .filter-count').textContent = countByCategory('corporate');
+            document.querySelector('[data-filter="travel"] .filter-count').textContent = countByCategory('travel');
+            document.querySelector('[data-filter="documentary"] .filter-count').textContent = countByCategory('documentary');
+            document.querySelector('[data-filter="concept"] .filter-count').textContent = countByCategory('concept');
+
+            // Update category header counts
+            categoryHeaders.forEach(header => {
+                const cat = header.dataset.category;
+                const count = countByCategory(cat);
+                const countSpan = header.querySelector('.category-header-count');
+                if (countSpan) countSpan.textContent = '(' + count + ')';
+            });
+        }
+
+        updateCounts();
+
+        // Filter + Search state
+        let currentFilter = 'all';
+        const searchInput = document.getElementById('searchInput');
+
+        function matchesSearch(card) {
+            const query = searchInput.value.toLowerCase().trim();
+            if (!query) return true;
+            const title = (card.querySelector('.work-title')?.textContent || '').toLowerCase();
+            const category = (card.querySelector('.work-category')?.textContent || '').toLowerCase();
+            const alt = (card.querySelector('img')?.alt || '').toLowerCase();
+            return title.includes(query) || category.includes(query) || alt.includes(query);
+        }
+
+        function applyFilters() {
+            let visibleCount = 0;
+            workCards.forEach(card => {
+                const matchCat = (currentFilter === 'all' || card.dataset.category === currentFilter);
+                const matchSearch = matchesSearch(card);
+                if (matchCat && matchSearch) {
+                    card.classList.remove('hidden');
+                    card.style.position = '';
+                    card.style.visibility = '';
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Show/hide category headers
+            categoryHeaders.forEach(header => {
+                const cat = header.dataset.category;
+                if (currentFilter === 'all' && !searchInput.value.trim()) {
+                    header.style.display = '';
+                } else if (cat === currentFilter && !searchInput.value.trim()) {
+                    header.style.display = '';
+                } else {
+                    header.style.display = 'none';
+                }
+            });
+
+            // Show/hide no-results
+            document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // Category filter buttons
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentFilter = btn.dataset.filter;
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                applyFilters();
+            });
+        });
+
+        // Search input
+        searchInput.addEventListener('input', () => {
+            if (searchInput.value.trim()) {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                document.querySelector('[data-filter="all"]').classList.add('active');
+                currentFilter = 'all';
+            }
+            applyFilters();
+        });
+
+        // === Video Modal ===
+        const modal = document.createElement('div');
+        modal.className = 'video-modal';
+        modal.innerHTML = '<div class="video-modal-content"><button class="video-modal-close">&times;</button><video controls autoplay></video></div>';
+        document.body.appendChild(modal);
+
+        const modalVideo = modal.querySelector('video');
+        const closeBtn = modal.querySelector('.video-modal-close');
+
+        function closeModal() {
+            modal.classList.remove('active');
+            modalVideo.pause();
+            modalVideo.src = '';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        });
+
+        // Click to play
+        workCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const videoSrc = card.dataset.video;
+                if (videoSrc) {
+                    modalVideo.src = videoSrc;
+                    modal.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
