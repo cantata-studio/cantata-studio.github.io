@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cantata-studio.net/sitemap.xml
