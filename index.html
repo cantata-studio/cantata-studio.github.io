@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CANTATA Studio | 用影像讲述品牌故事</title>
+    <title>CANTATA Studio | 专业影视制作</title>
     <meta name="description" content="CANTATA Studio 专注于企业宣传片、商业广告片、音乐MV、IP打造、AIGC内容创作。用影像讲述品牌故事，电影级制作标准。">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -212,7 +212,22 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             overflow: hidden;
+            background: #0A0A0A;
         }
+        .hero-loading {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px; height: 48px;
+            border: 2px solid rgba(255,255,255,0.08);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 5;
+            transition: opacity 0.6s;
+        }
+        .hero-loading.hidden { opacity: 0; pointer-events: none; }
+        @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
         .hero-video {
             position: absolute;
             top: 0; left: 0;
@@ -902,8 +917,9 @@
     <!-- Hero v4 -->
     <section class="hero">
         <div class="hero-video-container">
-            <video class="hero-video active" muted playsinline loop></video>
-            <video class="hero-video" muted playsinline loop></video>
+            <div class="hero-loading"></div>
+            <video class="hero-video active" muted playsinline loop preload="auto"></video>
+            <video class="hero-video" muted playsinline loop preload="none"></video>
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-grain"></div>
@@ -1318,6 +1334,10 @@
             videoElements[0].src = heroVideos[0];
             videoElements[0].load();
             videoElements[0].play().catch(() => {});
+            videoElements[0].addEventListener('playing', () => {
+                const loader = document.querySelector('.hero-loading');
+                if (loader) loader.classList.add('hidden');
+            });
             if (heroVideos.length > 1) {
                 videoElements[1].src = heroVideos[1];
                 videoElements[1].load();
@@ -1402,5 +1422,3 @@
     </script>
 </body>
 </html>
-
-
