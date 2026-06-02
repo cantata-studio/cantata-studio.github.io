@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CANTATA Studio | 用影像讲述品牌故事</title>
+    <meta name="description" content="CANTATA Studio 专注于企业宣传片、商业广告片、音乐MV、IP打造、AIGC内容创作。用影像讲述品牌故事，电影级制作标准。">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "CANTATA Studio",
+      "url": "https://cantata-studio.net",
+      "description": "专业影视制作团队，专注于企业宣传片、商业广告片、音乐MV、IP打造、AIGC内容创作",
+      "telephone": "+86 187 7058 0009",
+      "email": "1272527176@qq.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "杭州",
+        "addressRegion": "浙江",
+        "addressCountry": "CN"
+      },
+      "sameAs": [
+        "https://xhslink.com/m/1U3K3cNQAfz"
+      ]
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Playfair+Display:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ============================================
+           DESIGN TOKENS — Stripe + Linear + Apple
+           ============================================ */
+        :root {
+            --bg-root:    #080808;
+            --bg-surface: #0F0F0F;
+            --bg-elevated:#18181B;
+            --bg-overlay: #212125;
+            --carbon-black: #18181B;
+            --deep-black:   #000000;
+            --graphite:     #27272A;
+            --ivory:        #FAFAFA;
+            --ivory-dim:    #F2F0EC;
+            --accent:       #C9A87C;
+            --accent-bright:#D4B58A;
+            --accent-dim:   rgba(201, 168, 124, 0.15);
+            --accent-glow:  rgba(201, 168, 124, 0.08);
+            --border-light:    rgba(0,0,0,0.08);
+            --border-dark:     rgba(255,255,255,0.06);
+            --border-dark-hover: rgba(255,255,255,0.1);
+            --font-display: 'Playfair Display', serif;
+            --font-cn:      'Noto Sans SC', sans-serif;
+            --font-body:    'Inter', 'Noto Sans SC', system-ui, sans-serif;
+            --ls-en:   0.12em;
+            --ls-cn:   0.02em;
+            --ls-tag:  0.25em;
+            --ls-label:0.2em;
+            --space-sm:  8px;
+            --space-md:  16px;
+            --space-lg:  32px;
+            --space-xl:  48px;
+            --space-2xl: 64px;
+            --space-3xl: 80px;
+            --duration-fast: 0.2s;
+            --duration-base: 0.35s;
+            --duration-slow: 0.75s;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--ivory);
+            color: var(--carbon-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .title-en { font-family: var(--font-display); font-weight: 400; letter-spacing: var(--ls-en); }
+        .title-cn { font-family: var(--font-cn); font-weight: 500; letter-spacing: var(--ls-cn); }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--duration-base) var(--ease-out);
+        }
+        nav.scrolled {
+            background-color: rgba(250, 250, 250, 0.72);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            padding: 16px 48px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .logo {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--ivory);
+            text-decoration: none;
+            letter-spacing: var(--ls-en);
+            transition: color var(--duration-base) var(--ease-out);
+        }
+        .logo span { font-weight: 400; color: rgba(250, 250, 250, 0.65); transition: color var(--duration-base) var(--ease-out); }
+        nav.scrolled .logo { color: var(--carbon-black); }
+        nav.scrolled .logo span { color: var(--graphite); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a {
+            font-size: 13px; font-weight: 500;
+            color: rgba(250, 250, 250, 0.85);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color var(--duration-fast) var(--ease-out);
+        }
+        .nav-links a:hover { color: var(--ivory); }
+        nav.scrolled .nav-links a { color: var(--graphite); }
+        nav.scrolled .nav-links a:hover { color: var(--carbon-black); }
+        .nav-cta {
+            padding: 10px 24px;
+            background: transparent;
+            color: var(--ivory) !important;
+            border: 1px solid rgba(250, 250, 250, 0.4);
+            border-radius: 2px;
+            font-size: 12px; font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: var(--ls-tag);
+            transition: all var(--duration-base) var(--ease-out);
+        }
+        .nav-cta:hover { background: var(--accent) !important; border-color: var(--accent) !important; color: var(--deep-black) !important; }
+        nav.scrolled .nav-cta { background: var(--carbon-black); border-color: var(--carbon-black); color: var(--ivory) !important; }
+        nav.scrolled .nav-cta:hover { background: var(--accent) !important; border-color: var(--accent) !important; color: var(--deep-black) !important; }
+
+        .hamburger {
+            display: none; flex-direction: column;
+            justify-content: center; gap: 5px;
+            width: 28px; height: 28px;
+            background: none; border: none;
+            cursor: pointer; z-index: 1100; padding: 0;
+        }
+        .hamburger span {
+            display: block; width: 24px; height: 1.5px;
+            background: var(--ivory);
+            transition: all var(--duration-base) var(--ease-out);
+            transform-origin: center;
+        }
+        nav.scrolled .hamburger span { background: var(--carbon-black); }
+        .hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+        .mobile-menu {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.97); z-index: 1050;
+            flex-direction: column; align-items: center;
+            justify-content: center; gap: 36px;
+            opacity: 0; transition: opacity var(--duration-base) var(--ease-out);
+        }
+        .mobile-menu.active { display: flex; opacity: 1; }
+        .mobile-menu a {
+            font-size: 20px; color: var(--ivory);
+            text-decoration: none; letter-spacing: var(--ls-en);
+            font-weight: 500; font-family: var(--font-cn);
+            transition: color var(--duration-fast);
+        }
+        .mobile-menu a:hover { color: var(--accent); }
+        .mobile-menu .mobile-cta {
+            margin-top: 8px; padding: 14px 40px;
+            border: 1px solid var(--accent);
+            color: var(--accent) !important;
+            font-size: 13px; font-weight: 600;
+            letter-spacing: var(--ls-tag);
+            text-transform: uppercase; border-radius: 2px;
+        }
+        .mobile-menu .mobile-cta:hover { background: var(--accent); color: var(--deep-black) !important; }
+
+        /* ============================================
+           HERO v4 — crisp video, staggered entrance, ambient grain
+           ============================================ */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--deep-black);
+        }
+        .hero-video-container {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+        }
+        .hero-video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            filter: blur(18px);
+            transform: scale(1.05);
+            transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hero-video.active { opacity: 0.45; }
+        .hero-overlay {
+            position: absolute; inset: 0; z-index: 1;
+            background:
+                radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.25) 70%),
+                linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.45) 100%);
+        }
+        /* Subtle film grain texture */
+        .hero-grain {
+            position: absolute; inset: 0; z-index: 2;
+            opacity: 0.04; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-size: 256px 256px;
+        }
+        .hero-content {
+            position: relative; z-index: 10;
+            text-align: center; padding: 0 24px;
+        }
+        .hero-logo {
+            max-width: 420px; width: 85%; height: auto;
+            margin-bottom: 24px;
+            opacity: 0; transform: translateY(30px);
+            animation: heroReveal 1s var(--ease-out) 0.3s forwards;
+        }
+        .hero-subtitle {
+            font-family: var(--font-cn);
+            font-size: clamp(15px, 2vw, 20px);
+            font-weight: 200;
+            color: rgba(250, 250, 250, 0.7);
+            margin-bottom: 40px;
+            letter-spacing: 0.15em;
+            opacity: 0; transform: translateY(20px);
+            animation: heroReveal 1s var(--ease-out) 0.6s forwards;
+        }
+        .hero-divider {
+            width: 40px; height: 1px;
+            background: var(--accent);
+            margin: 0 auto 40px;
+            opacity: 0;
+            animation: heroReveal 1s var(--ease-out) 0.9s forwards;
+        }
+        .hero-cta {
+            display: inline-block;
+            padding: 18px 52px;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: 12px; font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: var(--ls-tag);
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all var(--duration-base) var(--ease-out);
+            opacity: 0; transform: translateY(20px);
+            animation: heroReveal 1s var(--ease-out) 1.1s forwards;
+        }
+        .hero-cta:hover { background: var(--accent); color: var(--deep-black); transform: translateY(-2px); }
+        @keyframes heroReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .scroll-hint {
+            position: absolute;
+            bottom: 48px; left: 50%;
+            transform: translateX(-50%);
+            color: rgba(250, 250, 250, 0.3);
+            font-size: 11px;
+            letter-spacing: var(--ls-tag);
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+            opacity: 0;
+            animation: bounce 2s infinite, heroReveal 1s var(--ease-out) 1.5s forwards;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ============================================
+           SECTION STYLES
+           ============================================ */
+        section { padding: 120px 48px; }
+        .section-header { margin-bottom: var(--space-3xl); }
+        .section-label {
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: var(--ls-label);
+            color: var(--accent);
+            margin-bottom: var(--space-md);
+        }
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 400;
+            color: var(--carbon-black);
+            line-height: 1.1;
+            letter-spacing: var(--ls-en);
+        }
+        .section-desc {
+            font-size: 16px; line-height: 1.8;
+            color: var(--graphite);
+            max-width: 520px; margin-top: var(--space-md);
+        }
+
+        /* ============================================
+           SCROLL REVEAL — enhanced stagger system
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.reveal-shown {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.05s; }
+        .reveal-delay-2 { transition-delay: 0.1s; }
+        .reveal-delay-3 { transition-delay: 0.15s; }
+        .reveal-delay-4 { transition-delay: 0.2s; }
+        .reveal-delay-5 { transition-delay: 0.25s; }
+        .reveal-delay-6 { transition-delay: 0.3s; }
+
+        /* ============================================
+           WORKS — refined hover, stagger reveal
+           ============================================ */
+        .works { background-color: var(--ivory); }
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 1400px) { .works-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 900px) { .works-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .work-card {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background-color: var(--graphite);
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .work-card::before {
+            content: '';
+            position: absolute; inset: 0; z-index: 1;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            transition: border-color 0.4s var(--ease-out);
+            pointer-events: none;
+        }
+        .work-card:hover::before {
+            border-color: var(--accent);
+        }
+        .work-card img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s var(--ease-out), filter 0.5s;
+        }
+        .work-card:hover img {
+            transform: scale(1.06);
+            filter: brightness(0.6);
+        }
+        .work-overlay {
+            position: absolute; inset: 0; z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px 28px 24px;
+            background: linear-gradient(transparent 45%, rgba(0,0,0,0.85) 100%);
+            opacity: 0;
+            transition: opacity 0.4s var(--ease-out);
+        }
+        .work-card:hover .work-overlay { opacity: 1; }
+        .work-category {
+            font-size: 10px; font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+        .work-title {
+            font-family: var(--font-cn);
+            font-size: 18px; font-weight: 500;
+            color: var(--ivory);
+            letter-spacing: var(--ls-cn);
+        }
+        .work-play {
+            position: absolute;
+            top: 50%; left: 50%; z-index: 3;
+            transform: translate(-50%, -50%);
+            width: 64px; height: 64px;
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s, transform 0.4s var(--ease-spring);
+        }
+        .work-card:hover .work-play {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .work-play::after {
+            content: '';
+            width: 0; height: 0;
+            border-left: 16px solid rgba(255,255,255,0.9);
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            margin-left: 3px;
+        }
+
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed; inset: 0;
+            z-index: 2000;
+            background: rgba(0,0,0,0.96);
+            align-items: center; justify-content: center;
+        }
+        .video-modal.active { display: flex; }
+        .video-modal-content {
+            position: relative;
+            width: 90%; max-width: 1400px;
+            background: #000;
+            border-radius: 8px; overflow: hidden;
+        }
+        .video-modal video { width: 100%; height: auto; display: block; }
+        .video-modal-close {
+            position: absolute;
+            top: -50px; right: 0;
+            width: 40px; height: 40px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            background: transparent;
+            color: var(--ivory); font-size: 24px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all var(--duration-base);
+        }
+        .video-modal-close:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ============================================
+           BRAND PARTNERS v4 — logo wall with accent highlights
+           ============================================ */
+        .partners {
+            background: var(--ivory-dim);
+            padding: 120px 48px;
+            position: relative;
+        }
+        .partners::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 48px; right: 48px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+            opacity: 0.3;
+        }
+        .partners-inner { max-width: 1200px; margin: 0 auto; }
+        .partners-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+        .partners-header .section-title { color: var(--carbon-black); }
+        .partners-wall {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .partner-card {
+            position: relative;
+            padding: 28px 36px;
+            background: var(--ivory);
+            cursor: default;
+            transition: all 0.4s var(--ease-out);
+            border: 1px solid transparent;
+            min-width: 140px;
+            text-align: center;
+        }
+        .partner-card:hover {
+            background: #fff;
+            border-color: var(--accent-dim);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+            z-index: 2;
+        }
+        .partner-card-name {
+            font-family: var(--font-cn);
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--carbon-black);
+            letter-spacing: var(--ls-cn);
+            transition: color 0.3s;
+            margin-bottom: 4px;
+        }
+        .partner-card:hover .partner-card-name { color: var(--accent); }
+        .partner-card-cn {
+            display: block;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .partner-card-en {
+            display: block;
+            font-size: 10px;
+            color: var(--graphite);
+            letter-spacing: 0.06em;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        .partner-card:hover .partner-card-en { opacity: 0.8; }
+        .partner-accent {
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 0; height: 2px;
+            background: var(--accent);
+            transition: width 0.4s var(--ease-out);
+        }
+        .partner-card:hover .partner-accent { width: 40px; }
+        @media (max-width: 768px) {
+            .partner-card { min-width: 120px; padding: 22px 20px; }
+        }
+
+        /* ============================================
+           SERVICES v4 — numbered cards, gradient accent, deeper hierarchy
+           ============================================ */
+        .services {
+            background: var(--bg-root);
+            color: var(--ivory);
+        }
+        .services .section-label { color: var(--accent); }
+        .services .section-title { color: var(--ivory); }
+        .services .section-desc { color: rgba(250,250,250,0.5); }
+
+        .services-layout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.03);
+        }
+        @media (max-width: 1080px) { .services-layout { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .services-layout { grid-template-columns: 1fr; } }
+
+        .service-card {
+            position: relative;
+            padding: 56px 40px 48px;
+            background: var(--bg-surface);
+            transition: all 0.5s var(--ease-out);
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.5s var(--ease-out);
+        }
+        .service-card:hover::before { opacity: 1; }
+        .service-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 0%, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s var(--ease-out);
+            pointer-events: none;
+        }
+        .service-card:hover::after { opacity: 1; }
+        .service-card:hover {
+            background: var(--bg-elevated);
+            transform: translateY(-4px);
+        }
+        .service-index {
+            font-family: var(--font-display);
+            font-size: 56px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.04);
+            position: absolute;
+            top: 8px; right: 24px;
+            line-height: 1;
+            transition: color 0.5s var(--ease-out);
+        }
+        .service-card:hover .service-index { color: rgba(201, 168, 124, 0.06); }
+        .service-icon {
+            width: 52px; height: 52px;
+            margin-bottom: 28px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.04);
+            transition: all 0.4s var(--ease-out);
+        }
+        .service-card:hover .service-icon {
+            background: var(--accent-dim);
+            transform: scale(1.05);
+        }
+        .service-icon svg {
+            width: 28px; height: 28px;
+            stroke: var(--accent);
+            transition: stroke 0.4s;
+        }
+        .service-title {
+            font-family: var(--font-cn);
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--ivory);
+            margin-bottom: 14px;
+            letter-spacing: var(--ls-cn);
+            position: relative; z-index: 1;
+        }
+        .service-desc {
+            font-size: 14px;
+            line-height: 1.8;
+            color: rgba(250,250,250,0.4);
+            font-weight: 300;
+            position: relative; z-index: 1;
+            transition: color 0.4s;
+        }
+        .service-card:hover .service-desc { color: rgba(250,250,250,0.55); }
+
+        /* ============================================
+           ABOUT v4 — editorial layout, pull quote, breathing room
+           ============================================ */
+        .about { background: var(--ivory); }
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 96px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) { .about-layout { grid-template-columns: 1fr; gap: 48px; } }
+        .about-visual {
+            position: relative;
+        }
+        .about-image-wrap {
+            aspect-ratio: 4/3;
+            background: var(--graphite);
+            overflow: hidden;
+            border-radius: 6px;
+            position: relative;
+        }
+        .about-image-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 1s var(--ease-out);
+        }
+        .about-image-wrap:hover img { transform: scale(1.04); }
+        .about-accent-pill {
+            position: absolute;
+            bottom: -20px; right: -20px;
+            background: var(--carbon-black);
+            color: var(--accent);
+            padding: 16px 28px;
+            border-radius: 4px;
+            font-family: var(--font-display);
+            font-size: 14px;
+            letter-spacing: var(--ls-en);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            z-index: 2;
+        }
+        @media (max-width: 768px) { .about-accent-pill { position: static; margin-top: 16px; display: inline-block; } }
+        .about-text-wrap { padding-right: 24px; }
+        .about-text-wrap p {
+            font-size: 17px;
+            line-height: 2;
+            color: var(--graphite);
+            margin-bottom: 28px;
+            font-weight: 300;
+        }
+        .about-quote {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--carbon-black);
+            line-height: 1.5;
+            letter-spacing: 0.05em;
+            margin-bottom: 32px;
+            padding-left: 24px;
+            border-left: 2px solid var(--accent);
+            font-style: italic;
+        }
+        .stats {
+            display: flex;
+            gap: 56px;
+            margin-top: 48px;
+            padding-top: 48px;
+            border-top: 1px solid var(--border-light);
+        }
+        @media (max-width: 768px) { .stats { gap: 32px; } }
+        .stat-item { text-align: left; }
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 56px;
+            font-weight: 400;
+            color: var(--carbon-black);
+            line-height: 1;
+            letter-spacing: var(--ls-en);
+            transition: color 0.4s;
+        }
+        .stat-number.counted { color: var(--accent); }
+        .stat-label {
+            font-size: 12px;
+            color: var(--graphite);
+            margin-top: 10px;
+            letter-spacing: var(--ls-en);
+        }
+
+        /* ============================================
+           CONTACT v4 — card grid, glass feel, social row
+           ============================================ */
+        .contact {
+            background: var(--carbon-black);
+            color: var(--ivory);
+            text-align: center;
+            padding: 120px 48px;
+        }
+        .contact .section-title { color: var(--ivory); margin-bottom: 16px; }
+        .contact-subtitle {
+            font-size: 16px;
+            color: rgba(250,250,250,0.5);
+            max-width: 520px;
+            margin: 0 auto 64px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto 48px;
+        }
+        @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+        .contact-card {
+            padding: 36px 28px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 6px;
+            transition: all 0.4s var(--ease-out);
+            text-decoration: none;
+            display: block;
+            color: var(--ivory);
+        }
+        .contact-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: var(--accent-dim);
+            transform: translateY(-2px);
+        }
+        .contact-card-icon {
+            width: 40px; height: 40px;
+            margin: 0 auto 16px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            background: rgba(201, 168, 124, 0.1);
+        }
+        .contact-card-icon svg {
+            width: 18px; height: 18px;
+            stroke: var(--accent);
+        }
+        .contact-card-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: var(--ls-label);
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        .contact-card-value {
+            font-size: 15px;
+            color: rgba(250,250,250,0.8);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        .contact-social-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 48px;
+            padding-top: 24px;
+        }
+        .contact-social-link {
+            font-size: 13px;
+            color: rgba(250,250,250,0.4);
+            text-decoration: none;
+            letter-spacing: 0.06em;
+            transition: color 0.3s;
+            padding-bottom: 4px;
+            border-bottom: 1px solid transparent;
+        }
+        .contact-social-link:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        .contact-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 56px;
+            background: var(--accent);
+            color: var(--deep-black);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: var(--ls-tag);
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all var(--duration-base) var(--ease-out);
+        }
+        .contact-cta:hover { background: var(--ivory); transform: translateY(-2px); }
+        .contact-cta-arrow {
+            display: inline-block;
+            transition: transform 0.3s var(--ease-out);
+        }
+        .contact-cta:hover .contact-cta-arrow { transform: translateX(4px); }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            padding: 48px;
+            background: var(--deep-black);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+        }
+        .footer-logo { font-family: var(--font-display); font-size: 16px; color: rgba(250,250,250,0.3); letter-spacing: var(--ls-en); }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { font-size: 12px; color: rgba(250,250,250,0.4); text-decoration: none; transition: color var(--duration-fast); }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-copyright { font-size: 11px; color: rgba(250,250,250,0.3); }
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            nav.scrolled { padding: 16px 24px; }
+            .hamburger { display: flex; }
+            .nav-links { display: none !important; }
+            section { padding: 80px 24px; }
+            .section-header { margin-bottom: 48px; }
+            .works-grid { grid-template-columns: 1fr; }
+            .about-layout { grid-template-columns: 1fr; gap: 48px; }
+            .about-text-wrap { padding-right: 0; }
+            .stats { flex-wrap: wrap; gap: 32px; }
+            .partners { padding: 80px 24px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .contact-social-row { flex-wrap: wrap; gap: 24px; }
+            footer { flex-direction: column; gap: 24px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">CANTATA<span>STUDIO</span></a>
+        <div class="nav-links">
+            <a href="works.html">作品</a>
+            <a href="#services">服务</a>
+            <a href="#about">关于</a>
+            <a href="#contact" class="nav-cta">联系我们</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="works.html">作品</a>
+        <a href="#services">服务</a>
+        <a href="#about">关于</a>
+        <a href="#contact" class="mobile-cta">联系我们</a>
+    </div>
+
+    <!-- Hero v4 -->
+    <section class="hero">
+        <div class="hero-video-container">
+            <video class="hero-video active" muted playsinline loop></video>
+            <video class="hero-video" muted playsinline loop></video>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-grain"></div>
+        <div class="hero-content">
+            <img src="assets/images/logo-hero.png" alt="CANTATA" class="hero-logo">
+            <p class="hero-subtitle">用影像讲述品牌故事</p>
+            <div class="hero-divider"></div>
+            <a href="#contact" class="hero-cta">开始合作</a>
+        </div>
+        <div class="scroll-hint">向下探索</div>
+    </section>
+
+    <!-- Works -->
+    <section class="works" id="works">
+        <div class="section-header">
+            <div class="section-label">Selected Works</div>
+            <h2 class="section-title">精选作品</h2>
+        </div>
+        <div class="works-grid">
+            <div class="work-card reveal" data-video="https://cantata-studio.net/miaoqing-concept.mp4">
+                <img src="assets/works/miaoqing-concept.jpg" alt="描青概念片" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">描青 · 概念片</div>
+                </div>
+            </div>
+            <div class="work-card reveal reveal-delay-1" data-video="https://cantata-studio.net/canon-summer.mp4">
+                <img src="assets/works/canon-summer.jpg" alt="佳能夏日篇" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">佳能 · 热爱每一帧（夏日篇）</div>
+                </div>
+            </div>
+            <div class="work-card reveal reveal-delay-2" data-video="https://cantata-studio.net/xiaomi-chiaga.mp4">
+                <img src="assets/works/xiaomi-chiaga-13s.jpg" alt="小米恰噶" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">小米「恰噶」</div>
+                </div>
+            </div>
+            <div class="work-card reveal reveal-delay-3" data-video="https://cantata-studio.net/baojiayi.mp4">
+                <img src="assets/works/brand-story.jpg" alt="宝家洁" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">宝家洁</div>
+                </div>
+            </div>
+            <div class="work-card reveal reveal-delay-4" data-video="https://cantata-studio.net/laifen-toothbrush.mp4">
+                <img src="assets/works/laifen-toothbrush.jpg" alt="徕芬电动牙刷" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">徕芬 · 电动牙刷</div>
+                </div>
+            </div>
+            <div class="work-card reveal reveal-delay-5" data-video="https://cantata-studio.net/em-smart.mp4">
+                <img src="assets/works/em-smart.jpg" alt="EM-Smart" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">EM-Smart 激光雕刻机</div>
+                </div>
+            </div>
+            <div class="work-card reveal reveal-delay-6" data-video="https://cantata-studio.net/spring-tour.mp4">
+                <img src="assets/works/event-record.jpg" alt="春游纪录片" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">纪录片</div>
+                    <div class="work-title">徐秉龙春游纪录片</div>
+                </div>
+            </div>
+            <div class="work-card reveal" data-video="https://cantata-studio.net/puqi-teaser.mp4">
+                <img src="assets/works/puqi-hotel.jpg" alt="璞祺意境先导片" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">概念短片</div>
+                    <div class="work-title">璞祺意境 · 先导片</div>
+                </div>
+            </div>
+            <div class="work-card reveal reveal-delay-1" data-video="https://cantata-studio.net/mingdu-home.mp4">
+                <img src="assets/works/mingdu-cover-8s.jpg" alt="铭都家居" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">企业宣传</div>
+                    <div class="work-title">铭都家居</div>
+                </div>
+            </div>
+            <div class="work-card reveal reveal-delay-2" data-video="https://cantata-studio.net/fazhifa-teaser.mp4">
+                <img src="assets/works/fazhifa-preview.jpg" alt="发知发·先导片" loading="lazy">
+                <div class="work-play"></div>
+                <div class="work-overlay">
+                    <div class="work-category">品牌广告</div>
+                    <div class="work-title">发知发 · 先导片</div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 64px;">
+            <a href="works.html" style="display: inline-block; padding: 16px 48px; border: 1px solid var(--carbon-black); color: var(--carbon-black); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; transition: all 0.3s; border-radius: 2px;" onmouseover="this.style.backgroundColor='var(--carbon-black)';this.style.color='var(--ivory)'" onmouseout="this.style.backgroundColor='transparent';this.style.color='var(--carbon-black)'">查看全部作品</a>
+        </div>
+    </section>
+
+    <!-- Brand Partners v4 -->
+    <section class="partners" id="partners">
+        <div class="partners-inner">
+            <div class="partners-header">
+                <div class="section-label">Trusted By</div>
+                <h2 class="section-title">合作品牌</h2>
+                <p class="section-desc" style="margin:16px auto 0; text-align:center;">服务超过 50 个品牌客户，涵盖 3C 数码、家居、酒店、金融等行业</p>
+            </div>
+            <div class="partners-wall">
+                <div class="partner-card reveal">
+                    <span class="partner-card-cn">Canon 佳能</span>
+                    <span class="partner-card-en">Canon China</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal reveal-delay-1">
+                    <span class="partner-card-cn">Xiaomi 小米</span>
+                    <span class="partner-card-en">Xiaomi</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal reveal-delay-2">
+                    <span class="partner-card-cn">Panasonic 松下</span>
+                    <span class="partner-card-en">Panasonic</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal reveal-delay-3">
+                    <span class="partner-card-cn">卡萨帝</span>
+                    <span class="partner-card-en">Casarte</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal reveal-delay-4">
+                    <span class="partner-card-cn">usmile</span>
+                    <span class="partner-card-en">usmile</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal reveal-delay-5">
+                    <span class="partner-card-cn">徕芬</span>
+                    <span class="partner-card-en">Laifen</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal reveal-delay-6">
+                    <span class="partner-card-cn">闪铸 3D 打印</span>
+                    <span class="partner-card-en">Flashforge</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal">
+                    <span class="partner-card-cn">EM-Smart</span>
+                    <span class="partner-card-en">EM-Smart</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal reveal-delay-1">
+                    <span class="partner-card-cn">宝家洁</span>
+                    <span class="partner-card-en">Baojiajie</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal reveal-delay-2">
+                    <span class="partner-card-cn">铭都家居</span>
+                    <span class="partner-card-en">Mingdu Home</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal reveal-delay-3">
+                    <span class="partner-card-cn">中国平安</span>
+                    <span class="partner-card-en">Ping An</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal reveal-delay-4">
+                    <span class="partner-card-cn">天猫</span>
+                    <span class="partner-card-en">Tmall</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal reveal-delay-5">
+                    <span class="partner-card-cn">AIA 香港</span>
+                    <span class="partner-card-en">AIA Hong Kong</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal reveal-delay-6">
+                    <span class="partner-card-cn">璞祺酒店</span>
+                    <span class="partner-card-en">Puqi Hotel</span>
+                    <span class="partner-accent"></span>
+                </div>
+                <div class="partner-card reveal">
+                    <span class="partner-card-cn">发知发</span>
+                    <span class="partner-card-en">Fazhifa</span>
+                    <span class="partner-accent"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services v4 -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <div class="section-label">What We Do</div>
+            <h2 class="section-title">服务内容</h2>
+        </div>
+        <div class="services-layout">
+            <div class="service-card reveal">
+                <span class="service-index">01</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="3"/>
+                        <path d="M8 12h8M12 8v8"/>
+                        <circle cx="8.5" cy="8.5" r="1" fill="currentColor" stroke="none"/>
+                        <circle cx="15.5" cy="8.5" r="1" fill="currentColor" stroke="none"/>
+                        <circle cx="8.5" cy="15.5" r="1" fill="currentColor" stroke="none"/>
+                        <circle cx="15.5" cy="15.5" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">AIGC 内容创作</h3>
+                <p class="service-desc">融合 AI 生成技术与专业影视制作，提供 AI 短片、AI 广告、虚拟场景合成等新形态内容，为品牌探索下一代视觉表达。</p>
+            </div>
+            <div class="service-card reveal reveal-delay-1">
+                <span class="service-index">02</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <rect x="2" y="3" width="20" height="14" rx="2"/>
+                        <path d="M8 21h8M12 17v4"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">企业宣传片</h3>
+                <p class="service-desc">为企业量身打造品牌形象片，从脚本创意到后期制作全流程服务，展现企业核心价值。</p>
+            </div>
+            <div class="service-card reveal reveal-delay-2">
+                <span class="service-index">03</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">商业广告片 (TVC)</h3>
+                <p class="service-desc">电影级制作标准，让品牌广告更具感染力和传播力，精准触达目标受众。</p>
+            </div>
+            <div class="service-card reveal reveal-delay-3">
+                <span class="service-index">04</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <path d="M9 18V5l12-2v13"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <circle cx="18" cy="16" r="3"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">音乐 MV</h3>
+                <p class="service-desc">用镜头语言诠释音乐情感，打造视觉与听觉的双重艺术体验。</p>
+            </div>
+            <div class="service-card reveal reveal-delay-4">
+                <span class="service-index">05</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <circle cx="12" cy="8" r="5"/>
+                        <path d="M20 21a8 8 0 0 0-16 0"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">IP 打造</h3>
+                <p class="service-desc">从零构建个人/品牌 IP 的视觉体系，打造独特的内容辨识度和影响力。</p>
+            </div>
+            <div class="service-card reveal reveal-delay-5">
+                <span class="service-index">06</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <path d="M3 21h18M5 21V7l8-4v18M13 21V7l6 4v10"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">文旅宣传片</h3>
+                <p class="service-desc">展现城市、景区、文化项目的独特魅力，助力文旅品牌传播。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About v4 -->
+    <section class="about" id="about">
+        <div class="about-layout">
+            <div class="about-visual reveal">
+                <div class="about-image-wrap">
+                    <img src="assets/images/about-cantata.jpg" alt="CANTATA Studio 团队" loading="lazy">
+                </div>
+                <div class="about-accent-pill">Film Production</div>
+            </div>
+            <div class="about-text-wrap reveal">
+                <div class="section-label">About Us</div>
+                <h2 class="section-title" style="margin-bottom: 36px;">关于 CANTATA</h2>
+                <p>CANTATA Studio 是一支专业的影视制作团队，专注于企业宣传片、商业广告片、音乐MV、IP打造、AIGC内容创作等领域。</p>
+                <span class="about-quote">每一帧都承载着品牌的价值与情感，每一个镜头都讲述着独特的故事。</span>
+                <p>从脚本创意到后期制作，我们提供全流程服务，用专业打动客户，用作品说话。</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="8">0+</div>
+                        <div class="stat-label">年行业经验</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="200">0+</div>
+                        <div class="stat-label">完成项目</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="50">0+</div>
+                        <div class="stat-label">合作品牌</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact v4 -->
+    <section class="contact" id="contact">
+        <div class="section-label">Get In Touch</div>
+        <h2 class="section-title">开始合作</h2>
+        <p class="contact-subtitle">无论是企业宣传片、品牌广告还是 AIGC 内容创作，我们都能为您量身定制专业的影像解决方案。</p>
+
+        <div class="contact-grid">
+            <a href="mailto:1272527176@qq.com" class="contact-card reveal">
+                <div class="contact-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="M22 4L12 13 2 4"/>
+                    </svg>
+                </div>
+                <div class="contact-card-label">邮箱</div>
+                <div class="contact-card-value">1272527176@qq.com</div>
+            </a>
+            <div class="contact-card reveal reveal-delay-1">
+                <div class="contact-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                    </svg>
+                </div>
+                <div class="contact-card-label">电话</div>
+                <div class="contact-card-value">187 7058 0009</div>
+            </div>
+            <div class="contact-card reveal reveal-delay-2">
+                <div class="contact-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <div class="contact-card-label">地址</div>
+                <div class="contact-card-value">杭州 · 萧山区五七公社五幢二楼</div>
+            </div>
+        </div>
+
+        <a href="mailto:1272527176@qq.com" class="contact-cta">
+            发送合作意向
+            <span class="contact-cta-arrow">&rarr;</span>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">CANTATA STUDIO</div>
+        <div class="footer-links">
+            <a href="https://xhslink.com/m/1U3K3cNQAfz" target="_blank">小红书</a>
+            <a href="#">公众号</a>
+        </div>
+        <div class="footer-copyright">© 2026 CANTATA Studio. All rights reserved.</div>
+    </footer>
+
+    <script>
+        /* === Mobile Menu === */
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        /* === Navbar scroll === */
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        /* === Smooth scroll === */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        /* === Hero Video Carousel === */
+        const heroVideos = [
+            'https://cantata-studio.net/miaoqing-concept.mp4',
+            'https://cantata-studio.net/canon-summer.mp4',
+            'https://cantata-studio.net/xiaomi-chiaga.mp4',
+            'https://cantata-studio.net/baojiayi.mp4',
+            'https://cantata-studio.net/laifen-toothbrush.mp4',
+            'https://cantata-studio.net/em-smart.mp4',
+            'https://cantata-studio.net/spring-tour.mp4',
+            'https://cantata-studio.net/puqi-teaser.mp4',
+            'https://cantata-studio.net/mingdu-home.mp4'
+        ];
+        const videoElements = document.querySelectorAll('.hero-video');
+        let currentVideoIndex = 0;
+        let activeVideoIndex = 0;
+        const videoDuration = 8000;
+
+        function initHeroVideos() {
+            videoElements[0].src = heroVideos[0];
+            videoElements[0].load();
+            videoElements[0].play().catch(() => {});
+            if (heroVideos.length > 1) {
+                videoElements[1].src = heroVideos[1];
+                videoElements[1].load();
+            }
+            setInterval(switchHeroVideo, videoDuration);
+        }
+        function switchHeroVideo() {
+            const nextVideoIndex = activeVideoIndex === 0 ? 1 : 0;
+            const nextVideo = videoElements[nextVideoIndex];
+            currentVideoIndex = (currentVideoIndex + 1) % heroVideos.length;
+            const preloadIndex = (currentVideoIndex + 1) % heroVideos.length;
+            videoElements[activeVideoIndex].classList.remove('active');
+            nextVideo.classList.add('active');
+            nextVideo.play().catch(() => {});
+            activeVideoIndex = nextVideoIndex;
+            setTimeout(() => {
+                videoElements[activeVideoIndex === 0 ? 1 : 0].src = heroVideos[preloadIndex];
+                videoElements[activeVideoIndex === 0 ? 1 : 0].load();
+            }, 2000);
+        }
+        initHeroVideos();
+
+        /* === Video Modal === */
+        const modal = document.createElement('div');
+        modal.className = 'video-modal';
+        modal.innerHTML = '<div class="video-modal-content"><button class="video-modal-close">&times;</button><video controls autoplay></video></div>';
+        document.body.appendChild(modal);
+        const modalVideo = modal.querySelector('video');
+        const closeBtn = modal.querySelector('.video-modal-close');
+        function closeModal() { modal.classList.remove('active'); modalVideo.pause(); modalVideo.src = ''; }
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
+        document.querySelectorAll('.work-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const videoSrc = card.dataset.video;
+                if (videoSrc) { modalVideo.src = videoSrc; modal.classList.add('active'); }
+            });
+        });
+
+        /* === Scroll Reveal with stagger === */
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-shown');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(el => observer.observe(el));
+
+        /* === Counter animation for stats === */
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.target);
+                    if (!target || el.classList.contains('counted')) return;
+                    el.classList.add('counted');
+                    let current = 0;
+                    const duration = 1200;
+                    const steps = 40;
+                    const increment = target / steps;
+                    const stepTime = duration / steps;
+                    const suffix = el.textContent.includes('+') ? '+' : '';
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            el.textContent = target + suffix;
+                            clearInterval(timer);
+                        } else {
+                            el.textContent = Math.floor(current) + suffix;
+                        }
+                    }, stepTime);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        statNumbers.forEach(el => counterObserver.observe(el));
+    </script>
+</body>
+</html>
